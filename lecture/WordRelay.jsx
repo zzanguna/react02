@@ -4,7 +4,9 @@ const { Component } = React;
 //필요한 라이브러리를 가져오는 코드
 
 class WordRelay extends Component{
+    state = {
 
+    };
     render(){
 
     }
