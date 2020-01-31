@@ -14,8 +14,14 @@ module.exports = {
       rules:[{
           test:/\.jsx?/, //jsx를 정규표식을 하겠다
           loader:'babel-loader',//바벨을 연결한다
-          options:{
-              presets:['@babel/preset-env', '@babel/preset-react'],
+          options: {
+              presets: [['@babel/preset-env',{
+                  targets: {  //presets env는 옛날 브러우저를 자동을 지원해주는
+                      browsers:  ['> 1% in KR']   //크롬 버전만 호환할 수 있게(원하는 브라우저로만 바꿀 수 있다)
+                  },
+                  debug:true //개발용
+              }],
+                  '@babel/preset-react'],
               plugins:['@babel/plugin-proposal-class-properties']
           }
       }]
