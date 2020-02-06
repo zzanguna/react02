@@ -22,13 +22,17 @@ module.exports = {
                   debug:true //개발용
               }],
                   '@babel/preset-react'],
-              plugins:['@babel/plugin-proposal-class-properties']
+              plugins:[
+                  '@babel/plugin-proposal-class-properties',
+                  'react-hot-loader/babel',
+              ]
           }
       }]
     },
     //entry에 있는 파일을 읽어서 거기에 module을 적용한 수 output으로 뺀다.
     output: { //출력
         path : path.join(__dirname, 'dist'),
-        filename: 'app.js'
+        filename: 'app.js',
+        publicPath:'/dist/',
     },
 }
