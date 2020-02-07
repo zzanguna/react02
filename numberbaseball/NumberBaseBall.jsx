@@ -12,6 +12,7 @@ function getNumbers() {// 숫자 네개를 겹치지 않고 랜덤하게 뽑는 
 }
  const NumberBaseball  = () => {
 
+
     const [result, setResult] = useState('');
     const [value, setValue] = useState("");
     const [answer, setAnswer] = useState(getNumbers());
