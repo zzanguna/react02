@@ -99,6 +99,8 @@ class NumberBaseBallClass extends PureComponent {
 
 
     render() {
+        //render 안에 setState 쓰는 것은 아니다.
+
         const  {value, tries, result} = this.state;
         return(
             <>

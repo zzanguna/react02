@@ -1,7 +1,7 @@
 import React, { PureComponent, memo, useState} from "react";
 
 class Try extends PureComponent{
-    constructor(props){
+/*    constructor(props){
         super(props);
         const filtered = this.props.filter(() => {
 
@@ -11,11 +11,11 @@ class Try extends PureComponent{
             try : filtered
         }
         //constructor는 세심한 동작이 필요할때 주로 사용.
-    }
+    }*/
 /*
     state = {
         result : this.props.result
-    }*/
+    }
 
     onClick = () => {
         this.setState(
@@ -23,7 +23,7 @@ class Try extends PureComponent{
                 result : 1
             }
         )
-    }
+    }*/
     render() {
         const { tryInfo } = this.props;
         return(
