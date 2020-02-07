@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React, {PureComponent, createRef} from "react";
 import Try from "./Try";
 
 function getNumbers() {// 숫자 네개를 겹치지 않고 랜덤하게 뽑는 함수
@@ -21,23 +21,32 @@ class NumberBaseBallClass extends PureComponent {
         tries: []
     };
 
-    input;
-    onInputRef = (e) => {
-        this.input = e;
-    };
+    //간단하게 컨트롤러 하고 싶으면 사용
+    InputRef = createRef();
 
+    /*
+        input;
+        onInputRef = (e) => {
+            this.input = e;
+        };
+    */
+    //이방식은 항수 처리를 할 경우에 사용한다.
+    //ref 설정할때 자유롭다.
     onSubmitForm = (e) => {
         const {value, answer, tries}  = this.state;
 
         e.preventDefault();
         if (value == answer.join("")) {
             this.setState((prevState)=>{
+                //일급함수
+                //highorderfunction
+                //함수 안에 다른 함수를 넣는 것.
                 return {
                     tries: [...prevState.tries,{try : value , result : "홈런"}],
                     result : "홈런"
                 }
             })
-
+            this.InputRef.current.focus();
         } else {// 답 틀렸을때
             const answerArray = value.split("").map((v) => parseInt(v));
             let strike = 0;
@@ -51,6 +60,7 @@ class NumberBaseBallClass extends PureComponent {
                         answer:getNumbers()
                     }
                 );
+                this.InputRef.current.focus();
                 alert("게임을 다시 시작합니다,");
             } else {
                 for (let i = 0; i < 4; i += 1) {
@@ -65,6 +75,7 @@ class NumberBaseBallClass extends PureComponent {
                         tries : [...prevState.tries , {try : value, result :  `${strike} 스트라이크 ${ball} 볼.`}]
                     }
                 })
+                this.InputRef.current.focus();
             }
         }
     };
@@ -93,7 +104,7 @@ class NumberBaseBallClass extends PureComponent {
             <>
                 <h1>{result}</h1>
                 <form onSubmit={this. onSubmitForm}>
-                    <input ref={this.onInputRef} maxLength={4} value={value} onChange={this.onChangInput}/>
+                    <input ref={this.InputRef} maxLength={4} value={value} onChange={this.onChangInput}/>
                 </form>
                 <div>시도: {tries.length}</div>
                 <ul>
