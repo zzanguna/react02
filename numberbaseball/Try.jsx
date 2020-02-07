@@ -1,4 +1,4 @@
-import React, { PureComponent, memo} from "react";
+import React, { PureComponent, memo, useState} from "react";
 
 /*class Try extends PureComponent{
 
@@ -14,8 +14,16 @@ import React, { PureComponent, memo} from "react";
 }*/
 
 const Try  = memo(({tryInfo})=> {
+    //props를 변경할 경우
+    //Try의 state로 넣어서 변경해야한다.
+    const [result, setResult] = useState(tryInfo.result);
+
+    const onClick = () => {
+        setResult("1");
+    }
+
     return(
-        <li>
+        <li onClick={onClick}>
             <div>{tryInfo.try}</div>
             <div>{tryInfo.result}</div>
         </li>
