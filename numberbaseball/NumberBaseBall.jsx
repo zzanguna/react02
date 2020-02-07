@@ -1,4 +1,4 @@
-import React, { useState, useRef}  from "react";
+import React, { useState, memo, useRef}  from "react";
 import Try from "./Try";
 
 function getNumbers() {// 숫자 네개를 겹치지 않고 랜덤하게 뽑는 함수
@@ -10,14 +10,14 @@ function getNumbers() {// 숫자 네개를 겹치지 않고 랜덤하게 뽑는 
     }
     return array;
 }
- const NumberBaseball  = () => {
-
-
+//자식 컴포넌트는 memo 컴포넌트면 사용할 수 있다.
+ const NumberBaseball  = memo(() => {
     const [result, setResult] = useState('');
     const [value, setValue] = useState("");
     const [answer, setAnswer] = useState(getNumbers());
     const [tries, setTries ] = useState([]);
 
+    const inputRef = useRef(null);
     const onSubmitForm = (e) => {
         e.preventDefault();
         if (value == answer.join(" ")) {
@@ -33,6 +33,7 @@ function getNumbers() {// 숫자 네개를 겹치지 않고 랜덤하게 뽑는 
                 setValue("");
                 setAnswer(getNumbers());
                 setTries([]);
+                inputRef.current.focus();
             } else {
                 for (let i = 0; i < 4; i += 1) {
                     if (answerArray[i] === answer[i]) {
@@ -64,7 +65,7 @@ function getNumbers() {// 숫자 네개를 겹치지 않고 랜덤하게 뽑는 
             <>
                 <h1>{result}</h1>
                 <form onSubmit={onSubmitForm}>
-                    <input maxLength={4} value={value} onChange={onChangInput}/>
+                    <input ref={inputRef} maxLength={4} value={value} onChange={onChangInput}/>
                 </form>
                 <div>시도: {tries.length}</div>
                 <ul>
@@ -76,6 +77,6 @@ function getNumbers() {// 숫자 네개를 겹치지 않고 랜덤하게 뽑는 
                 </ul>
             </>
         );
-}
+});
 
 export default NumberBaseball;
